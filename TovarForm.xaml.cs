@@ -41,15 +41,18 @@ namespace myWpf
             tovarList.ItemsSource = tovars;
 
             tovarList.SelectedIndex = IdSelected;
+         
+            if (IdSelected != 0)
+                {
+                    Tovar t = db.tovar
+            .Where(c => c.IdTovar == int.Parse("" + tovarList.SelectedItems[0]))
+            .FirstOrDefault();
 
-            Tovar t = db.tovar
-                .Where(c => c.IdTovar == int.Parse("" + tovarList.SelectedItems[0]))
-                .FirstOrDefault();
-
-            InputName.Text = t.Name;
-            InputEdizm.Text = t.Edizm;
-            InputCena.Text = Convert.ToString(t.Cena);
-         }
+                    InputName.Text = t.Name;
+                    InputEdizm.Text = t.Edizm;
+                    InputCena.Text = Convert.ToString(t.Cena);
+                }
+            }
         }
 
         private void AddTovar(object sender, RoutedEventArgs e)
@@ -61,39 +64,54 @@ namespace myWpf
 
                     g.Name = InputName.Text;
                     g.Edizm = InputEdizm.Text;
-                    g.Cena = int.Parse(InputCena.Text);
 
-                    db.tovar.Add(g);
-                    db.SaveChanges();
+                    try
+                    {
+                        g.Cena = int.Parse(InputCena.Text);
+                        
+                        db.tovar.Add(g);
+                        db.SaveChanges();
+                    }
+                    catch (FormatException)
+                    {
+                        MessageBox.Show("{0}: Неправильно ввели число", InputCena.Text);
+                    }
+                    catch (OverflowException)
+                    {
+                        MessageBox.Show("{0}: Перевышение типа данных", InputCena.Text);
+                    }
+       
 
-                tovars.Clear();
-                var glist = db.tovar.ToList();
-                foreach (Tovar g1 in glist)
-                {
-                    tovars.Add(g1);
-                }
-                tovarList.ItemsSource = tovars;
+                    tovars.Clear();
+                    var glist = db.tovar.ToList();
+                    foreach (Tovar g1 in glist)
+                    {
+                        tovars.Add(g1);
+                    }
+                    tovarList.ItemsSource = tovars;
 
-
-          //  MessageBox.Show("Товар успешно добавлен");
 
             }
         }
 
         private void MouseClick(object sender, RoutedEventArgs e){
-        
+
+            IdSelected= tovarList.SelectedIndex;
+                  
             using (var db = new DataContext())
             {
-                Tovar t = db.tovar
-                  .Where(c => c.IdTovar == int.Parse("" + tovarList.SelectedItems[0]))
-                  .FirstOrDefault();
+                if (IdSelected != 0)
+                {
+                    Tovar t = db.tovar
+                      .Where(c => c.IdTovar == int.Parse("" + tovarList.SelectedItems[0]))
+                      .FirstOrDefault();
 
-                InputName.Text = t.Name;
-                InputEdizm.Text = t.Edizm;
-                InputCena.Text = Convert.ToString(t.Cena);
+                    InputName.Text = t.Name;
+                    InputEdizm.Text = t.Edizm;
+                    InputCena.Text = Convert.ToString(t.Cena);
+                }
 
-
-                //tovarList.SelectedIndex = IdSelected;
+               
 
                 //Tovar t = db.tovar
                 // .Where(c => c.IdTovar == int.Parse("" + tovarList.SelectedItems[0]))
@@ -109,7 +127,7 @@ namespace myWpf
 
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void DeleteTovar(object sender, RoutedEventArgs e)
         {
           
 
@@ -151,7 +169,7 @@ namespace myWpf
 
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void UpdateTovar(object sender, RoutedEventArgs e)
         {
             if (tovarList.SelectedIndex == -1) MessageBox.Show("Выделите запись");
             else
@@ -166,9 +184,24 @@ namespace myWpf
 
                     t.Name = InputName.Text;
                     t.Edizm = InputEdizm.Text;
-                    t.Cena = int.Parse(InputCena.Text);
 
-                    db.SaveChanges();
+                    try
+                    {
+                        t.Cena = int.Parse(InputCena.Text);
+                        db.SaveChanges();
+                    }
+                    catch (FormatException)
+                    {
+                        MessageBox.Show("{0}: Неправильно ввели число", InputCena.Text);
+                    }
+                    catch (OverflowException)
+                    {
+                        MessageBox.Show("{0}: Перевышение типа данных", InputCena.Text);
+                    }
+
+
+
+                   
 
                     tovars.Clear();
                     var glist = db.tovar.ToList();
@@ -183,7 +216,7 @@ namespace myWpf
             }
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void FirstTovar(object sender, RoutedEventArgs e)
         {
             using (var db = new DataContext())
             {
@@ -210,7 +243,7 @@ namespace myWpf
             }
         }
 
-        private void Button_Click_3(object sender, RoutedEventArgs e)
+        private void EndTovar(object sender, RoutedEventArgs e)
         {
             using (var db = new DataContext())
             {
@@ -236,7 +269,7 @@ namespace myWpf
             }
         }
 
-        private void Button_Click_4(object sender, RoutedEventArgs e)
+        private void DownTovar(object sender, RoutedEventArgs e)
         {
             using (var db = new DataContext())
             {
@@ -266,7 +299,7 @@ namespace myWpf
             }
         }
 
-        private void Button_Click_5(object sender, RoutedEventArgs e)
+        private void UpTovar(object sender, RoutedEventArgs e)
         {
             using (var db = new DataContext())
             {

@@ -19,8 +19,8 @@
             </ListView.View>
         </ListView>
         <Label Content="Товары" HorizontalAlignment="Left" Margin="23,5,0,0" VerticalAlignment="Top"/>
-        <Button Content="Удалить" HorizontalAlignment="Left" Margin="598,364,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.227,0.703" Height="40" Width="84" Click="Button_Click"/>
-        <Button Content="Обновить" HorizontalAlignment="Left" Margin="708,364,0,0" VerticalAlignment="Top" Height="40" Width="72" Click="Button_Click_1"/>
+        <Button Content="Удалить" HorizontalAlignment="Left" Margin="598,364,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.227,0.703" Height="40" Width="84" Click="DeleteTovar"/>
+        <Button Content="Обновить" HorizontalAlignment="Left" Margin="708,364,0,0" VerticalAlignment="Top" Height="40" Width="72" Click="UpdateTovar"/>
         <Label Content="Ед. измерения" HorizontalAlignment="Left" Margin="23,36,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="InputEdizm" HorizontalAlignment="Left" Margin="118,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="362" Height="26"/>
         <Label Content="Цена" HorizontalAlignment="Left" Margin="24,68,0,0" VerticalAlignment="Top"/>
@@ -28,10 +28,10 @@
         <Button Content="Добавить" HorizontalAlignment="Left" Margin="493,362,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.227,0.703" Height="40" Width="83"
                 Click="AddTovar"
                 />
-        <Button Content="First" HorizontalAlignment="Left" Margin="22,362,0,0" VerticalAlignment="Top" Height="42" Width="59" Click="Button_Click_2"/>
-        <Button Content="Down" HorizontalAlignment="Left" Margin="94,362,0,0" VerticalAlignment="Top" Height="42" Width="62" Click="Button_Click_4"/>
-        <Button Content="Up" HorizontalAlignment="Left" Margin="170,364,0,0" VerticalAlignment="Top" Height="40" Width="60" Click="Button_Click_5"/>
-        <Button Content="End" HorizontalAlignment="Left" Margin="242,364,0,0" VerticalAlignment="Top" Height="40" Width="72" Click="Button_Click_3"/>
+        <Button Content="First" HorizontalAlignment="Left" Margin="22,362,0,0" VerticalAlignment="Top" Height="42" Width="59" Click="FirstTovar"/>
+        <Button Content="Down" HorizontalAlignment="Left" Margin="94,362,0,0" VerticalAlignment="Top" Height="42" Width="62" Click="DownTovar"/>
+        <Button Content="Up" HorizontalAlignment="Left" Margin="170,364,0,0" VerticalAlignment="Top" Height="40" Width="60" Click="UpTovar"/>
+        <Button Content="End" HorizontalAlignment="Left" Margin="242,364,0,0" VerticalAlignment="Top" Height="40" Width="72" Click="EndTovar"/>
 
     </Grid>
 </Window>
