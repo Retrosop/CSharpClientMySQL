@@ -29,7 +29,10 @@ namespace myWpf
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+           //Connected MariyDB 10.6
             optionsBuilder.UseMySql("server=localhost;user=root;password=root;database=testdb;", new MySqlServerVersion(new Version(10, 6, 0)));
+           //Connected MSSQL Server
+           // optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB; Database=TestDB; Trusted_Connection=True");
         }
     }
 }
