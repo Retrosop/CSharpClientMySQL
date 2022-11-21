@@ -24,11 +24,13 @@ namespace myWpf
 
         [Required]
         [MaxLength(11)]
-        public int IdUlica { get; set; }
+        public int UlicaId { get; set; }
+        public Ulica Ulica { get; set; }
 
         [Required]
         [MaxLength(11)]
-        public int IdGorod { get; set; }
+        public int GorodId { get; set; }
+        public Gorod Gorod { get; set; }
 
         public ICollection<Prihod> Prihod { get; set; }
     }

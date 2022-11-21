@@ -18,5 +18,7 @@ namespace myWpf
         [Required]
         [Column(TypeName ="VARCHAR(255)")]
         public string Name { get; set; }
+
+        public ICollection<Postav> PostavU { get; set; }
     }
 }

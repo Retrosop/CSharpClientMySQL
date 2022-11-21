@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using myWpf;
 
@@ -10,9 +11,10 @@ using myWpf;
 namespace myWpf.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20221119033605_n26")]
+    partial class n26
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -42,7 +44,11 @@ namespace myWpf.Migrations
                         .HasMaxLength(11)
                         .HasColumnType("int");
 
-                    b.Property<int>("GorodId")
+                    b.Property<int>("IdGorod")
+                        .HasMaxLength(11)
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdUlica")
                         .HasMaxLength(11)
                         .HasColumnType("int");
 
@@ -54,15 +60,7 @@ namespace myWpf.Migrations
                         .IsRequired()
                         .HasColumnType("VARCHAR(15)");
 
-                    b.Property<int>("UlicaId")
-                        .HasMaxLength(11)
-                        .HasColumnType("int");
-
                     b.HasKey("IdPostav");
-
-                    b.HasIndex("GorodId");
-
-                    b.HasIndex("UlicaId");
 
                     b.ToTable("postav");
                 });
@@ -95,6 +93,22 @@ namespace myWpf.Migrations
                     b.HasIndex("TovarId");
 
                     b.ToTable("prihod");
+                });
+
+            modelBuilder.Entity("myWpf.Test", b =>
+                {
+                    b.Property<int>("IdTest")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(11)
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("VARCHAR(255)");
+
+                    b.HasKey("IdTest");
+
+                    b.ToTable("test");
                 });
 
             modelBuilder.Entity("myWpf.Tovar", b =>
@@ -138,25 +152,6 @@ namespace myWpf.Migrations
                     b.ToTable("ulica");
                 });
 
-            modelBuilder.Entity("myWpf.Postav", b =>
-                {
-                    b.HasOne("myWpf.Gorod", "Gorod")
-                        .WithMany("PostavG")
-                        .HasForeignKey("GorodId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("myWpf.Ulica", "Ulica")
-                        .WithMany("PostavU")
-                        .HasForeignKey("UlicaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Gorod");
-
-                    b.Navigation("Ulica");
-                });
-
             modelBuilder.Entity("myWpf.Prihod", b =>
                 {
                     b.HasOne("myWpf.Postav", "Postav")
@@ -176,11 +171,6 @@ namespace myWpf.Migrations
                     b.Navigation("Tovar");
                 });
 
-            modelBuilder.Entity("myWpf.Gorod", b =>
-                {
-                    b.Navigation("PostavG");
-                });
-
             modelBuilder.Entity("myWpf.Postav", b =>
                 {
                     b.Navigation("Prihod");
@@ -189,11 +179,6 @@ namespace myWpf.Migrations
             modelBuilder.Entity("myWpf.Tovar", b =>
                 {
                     b.Navigation("Prihod");
-                });
-
-            modelBuilder.Entity("myWpf.Ulica", b =>
-                {
-                    b.Navigation("PostavU");
                 });
 #pragma warning restore 612, 618
         }
