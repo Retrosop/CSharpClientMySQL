@@ -19,24 +19,6 @@ namespace myWpf.Migrations
                 .HasAnnotation("ProductVersion", "6.0.10")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("myWpf.Goods", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("Cena")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("goods3");
-                });
-
             modelBuilder.Entity("myWpf.Gorod", b =>
                 {
                     b.Property<int>("IdGorod")
@@ -91,18 +73,22 @@ namespace myWpf.Migrations
                     b.Property<DateTime>("DatPrih")
                         .HasColumnType("DATE");
 
-                    b.Property<int>("IdPostav")
-                        .HasMaxLength(11)
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdTovar")
-                        .HasMaxLength(11)
-                        .HasColumnType("int");
-
                     b.Property<int>("Kolvo")
                         .HasColumnType("INT(4)");
 
+                    b.Property<int>("PostavId")
+                        .HasMaxLength(11)
+                        .HasColumnType("int");
+
+                    b.Property<int>("TovarId")
+                        .HasMaxLength(11)
+                        .HasColumnType("int");
+
                     b.HasKey("IdPrihod");
+
+                    b.HasIndex("PostavId");
+
+                    b.HasIndex("TovarId");
 
                     b.ToTable("prihod");
                 });
@@ -162,6 +148,35 @@ namespace myWpf.Migrations
                     b.HasKey("IdUlica");
 
                     b.ToTable("ulica");
+                });
+
+            modelBuilder.Entity("myWpf.Prihod", b =>
+                {
+                    b.HasOne("myWpf.Postav", "Postav")
+                        .WithMany("Prihod")
+                        .HasForeignKey("PostavId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("myWpf.Tovar", "Tovar")
+                        .WithMany("Prihod")
+                        .HasForeignKey("TovarId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Postav");
+
+                    b.Navigation("Tovar");
+                });
+
+            modelBuilder.Entity("myWpf.Postav", b =>
+                {
+                    b.Navigation("Prihod");
+                });
+
+            modelBuilder.Entity("myWpf.Tovar", b =>
+                {
+                    b.Navigation("Prihod");
                 });
 #pragma warning restore 612, 618
         }

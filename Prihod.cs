@@ -17,11 +17,14 @@ namespace myWpf
 
         [Required]
         [MaxLength(11)]
-        public int IdPostav { get; set; }
+        public int PostavId { get; set; }
+        public Postav Postav { get; set; }
 
         [Required]
+       // [Column("IdTovar")]
         [MaxLength(11)]
-        public int IdTovar { get; set; }
+        public int TovarId { get; set; }
+        public Tovar Tovar { get; set; }
 
         [Required]
         [Column(TypeName = "INT(4)")]

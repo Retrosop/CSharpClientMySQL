@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace myWpf
 {
@@ -23,6 +24,8 @@ namespace myWpf
         [Required]
         [MaxLength(4)]
         public int Cena { get; set; }
+
+        public ICollection<Prihod> Prihod { get; set; }
 
 
         public override string ToString()

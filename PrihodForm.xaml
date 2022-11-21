@@ -7,6 +7,12 @@
         mc:Ignorable="d"
         Title="PrihodForm" Height="450" Width="800">
     <Grid>
-        
+        <DataGrid d:ItemsSource="{d:SampleData ItemCount=5}" Margin="24,20,24,20">
+            <DataGrid.Columns>
+                <DataGridTextColumn/>
+                <DataGridTextColumn/>
+            </DataGrid.Columns>
+        </DataGrid>
+
     </Grid>
 </Window>

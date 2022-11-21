@@ -12,9 +12,7 @@ namespace myWpf
     {
         public DataContext() : base() { }
         
-        public DbSet<Goods> goods3 { get; set; }
-
-        public DbSet<Tovar> tovar { get; set; }
+         public DbSet<Tovar> tovar { get; set; }
 
         public DbSet<Postav> postav { get; set; }
 
@@ -24,8 +22,7 @@ namespace myWpf
 
         public DbSet<Ulica> ulica { get; set; }
 
-        public DbSet<Test> test { get; set; }
-
+       // public DbSet<Test> test { get; set; } //Для тестерования запросов
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

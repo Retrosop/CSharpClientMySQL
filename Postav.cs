@@ -29,6 +29,8 @@ namespace myWpf
         [Required]
         [MaxLength(11)]
         public int IdGorod { get; set; }
+
+        public ICollection<Prihod> Prihod { get; set; }
     }
 
 
